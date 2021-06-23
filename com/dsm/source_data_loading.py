@@ -32,8 +32,8 @@ if __name__ == '__main__':
 
     src_list = app_conf["source_list"]
     for src in src_list:
-        output_path = app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + upper(src)
-        if upper(src) == "OL":
+        output_path = app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + src
+        if src == "OL":
             # MARK: SFTP
             print("Read loyalty data from SFTP folder and write it ot S3 bucket")
             ol_txn_df = spark.read \
@@ -49,7 +49,7 @@ if __name__ == '__main__':
             ol_txn_df.show(5, False)
             ut.write_to_s3(ol_txn_df, output_path)
 
-        elif upper(src) == "SB":
+        elif src == "SB":
             # MARK: MySQL
             print("\nRead loyalty data from MySql db and write it ot S3 bucket")
             jdbc_params = {"url": ut.get_mysql_jdbc_url(app_secret),
@@ -73,7 +73,7 @@ if __name__ == '__main__':
             txn_DF.show()
             ut.write_to_s3(txn_DF, output_path)
 
-        elif upper(src) == "CP":
+        elif src == "CP":
             # MARK: S3
             print("\nRead loyalty data from S3 and write it ot S3 bucket")
             cp_df = spark.read \
@@ -85,7 +85,7 @@ if __name__ == '__main__':
             cp_df = cp_df.withColumn("ins_dt", current_date())
             ut.write_to_s3(cp_df, output_path)
 
-        elif upper(src) == "ADDR":
+        elif src == "ADDR":
             # MARK: MongoDB
             print("\nRead loyalty data from MongoDB and write it ot S3 bucket")
             cust_aadr = spark \
