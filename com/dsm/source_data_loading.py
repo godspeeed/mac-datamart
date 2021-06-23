@@ -33,6 +33,7 @@ if __name__ == '__main__':
     src_list = app_conf["source_list"]
     for src in src_list:
         output_path = app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + src
+        src_conf = app_conf[src]
         if src == "OL":
             # MARK: SFTP
             print("Read loyalty data from SFTP folder and write it ot S3 bucket")
@@ -44,7 +45,7 @@ if __name__ == '__main__':
                 .option("pem", os.path.abspath(current_dir + "/../../../../" + app_secret["sftp_conf"]["pem"])) \
                 .option("fileType", "csv") \
                 .option("delimiter", "|") \
-                .load(app_conf["sftp_conf"]["directory"] + "/receipts_delta_GBR_14_10_2017.csv")
+                .load(src_conf["sftp_conf"]["directory"] + "/receipts_delta_GBR_14_10_2017.csv")
             ol_txn_df = ol_txn_df.withColumn("ins_dt", current_date())
             ol_txn_df.show(5, False)
             ut.write_to_s3(ol_txn_df, output_path)
