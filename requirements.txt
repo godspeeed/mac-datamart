@@ -5,4 +5,5 @@ pyyaml==5.3.1
 pyspark==2.4.5
 dataclasses==0.6
 pymongo==3.10.1
+boto3
 # PYTHONUNBUFFERED=1;PYSPARK_PYTHON=/usr/local/bin/python3.7;PYSPARK_DRIVER_PYTHON=/usr/local/bin/python3.7

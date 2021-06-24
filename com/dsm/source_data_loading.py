@@ -3,6 +3,7 @@ from pyspark.sql.functions import *
 import yaml
 import utils.utilities as ut
 import os.path
+import boto3
 
 if __name__ == '__main__':
 
@@ -72,7 +73,11 @@ if __name__ == '__main__':
                 .load()
             txn_DF = txn_DF.withColumn("ins_dt", current_date())
             txn_DF.show()
-            ut.write_to_s3(txn_DF, output_path)
+            s3 = boto3.resource('s3')
+            print("Testing 1", s3)
+            bucket = s3.Bucket(output_path)
+            print("Testing 2", bucket)
+            #ut.write_to_s3(txn_DF, output_path)
 
         elif src == "CP":
             # MARK: S3
