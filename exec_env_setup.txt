@@ -28,7 +28,7 @@ sudo yum install git-core -y
 pip install pyyaml==5.3.1
 
 git clone https://github.com/godspeeed/mac-datamart.git
-cd dataframe-examples-py
+cd mac-datamart
 export PYTHONPATH="$PWD"
 
 # Copy 2 files (private key and .secrets) from local to EMR cluster's master node,
