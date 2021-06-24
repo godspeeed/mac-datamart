@@ -21,7 +21,7 @@ git push origin master
 # Execute the lambda to create an single-node EMR cluster
 
 # Open an SSH session with the EMR cluster from your local system,
-ssh -i spark.pem hadoop@<cluster_dns_name>
+ssh -i test.pem hadoop@<cluster_dns_name>
 export LC_ALL=C
 sudo yum update -y
 sudo yum install git-core -y
