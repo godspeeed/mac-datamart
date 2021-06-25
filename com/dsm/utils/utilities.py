@@ -1,3 +1,4 @@
+import sys as system
 
 def get_redshift_jdbc_url(redshift_config: dict):
     host = redshift_config["redshift_conf"]["host"]
@@ -20,3 +21,10 @@ def write_to_s3(df, path):
         .mode("append") \
         .partitionBy("ins_dt") \
         .parquet(path)
+
+def filter_out_argument_source_list():
+    print("** Filtering Out **")
+    default_source_list = ["SB", "OL", "CP", "ADDR"]
+    argument_source_list = system.argv
+    final_list = list(set(default_source_list).intersection(argument_source_list))
+    return final_list

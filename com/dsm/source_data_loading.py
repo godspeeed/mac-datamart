@@ -32,6 +32,7 @@ if __name__ == '__main__':
     hadoop_conf.set("fs.s3a.access.key", app_secret["s3_conf"]["access_key"])
     hadoop_conf.set("fs.s3a.secret.key", app_secret["s3_conf"]["secret_access_key"])
 
+    print("******** Testing Data", ut.filter_out_argument_source_list())
     src_list = app_conf["source_list"]
     for src in src_list:
 
@@ -75,11 +76,6 @@ if __name__ == '__main__':
                 .load()
             txn_DF = txn_DF.withColumn("ins_dt", current_date())
             txn_DF.show()
-
-            print(system.argv)
-            for argument in system.argv:
-                print("************ Printing argument :--- ", argument)
-
             ut.write_to_s3(txn_DF, output_path)
 
         elif src == "CP":
@@ -106,5 +102,8 @@ if __name__ == '__main__':
             cust_aadr = cust_aadr.withColumn("ins_dt", current_date())
             cust_aadr.show()
             ut.write_to_s3(cust_aadr, output_path)
+
+        else:
+            print("******* Please enter any one of the following: \nSB\nOL\nCP\nADDR\n\n******* For Multiple enter comma separated e.g: SB,DL \n\n Default execution:- SB ")
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4,org.mongodb.spark:mongo-spark-connector_2.11:2.4.1,mysql:mysql-connector-java:8.0.15,com.springml:spark-sftp_2.11:1.1.1" com/dsm/source_data_loading.py
