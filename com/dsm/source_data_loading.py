@@ -34,8 +34,6 @@ if __name__ == '__main__':
 
     src_list = app_conf["source_list"]
     for src in src_list:
-        for argument in system.argv:
-            print("************ Printing argument :--- ", argument)
 
         output_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + src
         src_conf = app_conf[src]
@@ -77,6 +75,11 @@ if __name__ == '__main__':
                 .load()
             txn_DF = txn_DF.withColumn("ins_dt", current_date())
             txn_DF.show()
+
+            print(system.argv)
+            for argument in system.argv:
+                print("************ Printing argument :--- ", argument)
+
             ut.write_to_s3(txn_DF, output_path)
 
         elif src == "CP":
