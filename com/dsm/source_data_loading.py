@@ -36,6 +36,10 @@ if __name__ == '__main__':
     arg_filter = ut.filter_out_argument_source_list()
     src_list = app_conf["source_list"]
 
+    print("old_src_List Is :- ", src_list)
+    print("old_src_List Is arg_filter :- ", arg_filter)
+    print("old_src_List Is arg_filter length :- ", len(arg_filter))
+
     if len(arg_filter) != 0:
         src_list = arg_filter
     else:
