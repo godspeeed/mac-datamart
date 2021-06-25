@@ -25,7 +25,8 @@ def write_to_s3(df, path):
 def filter_out_argument_source_list():
     print("** Filtering Out **")
     default_source_list = ["SB", "OL", "CP", "ADDR"]
-    argument_source_list = system.argv
+    input_argv = [x.upper() for x in system.argv]
+    argument_source_list = input_argv
     print("*** System Argv **", argument_source_list)
     final_list = list(set(default_source_list).intersection(argument_source_list))
     return final_list

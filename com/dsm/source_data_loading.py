@@ -33,7 +33,13 @@ if __name__ == '__main__':
     hadoop_conf.set("fs.s3a.secret.key", app_secret["s3_conf"]["secret_access_key"])
 
     print("******** Testing Data", ut.filter_out_argument_source_list())
+    arg_filter = ut.filter_out_argument_source_list()
     src_list = app_conf["source_list"]
+
+    if len(arg_filter) != 0:
+        src_list = arg_filter
+
+    print("src_List Is :- ", src_list)
     for src in src_list:
 
         output_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + src
