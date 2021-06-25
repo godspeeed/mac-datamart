@@ -38,8 +38,13 @@ if __name__ == '__main__':
 
     if len(arg_filter) != 0:
         src_list = arg_filter
+    else:
+        print("else statement print........")
 
     print("src_List Is :- ", src_list)
+    print("src_List Is arg_filter :- ", arg_filter)
+    print("src_List Is arg_filter length :- ", len(arg_filter))
+
     for src in src_list:
 
         output_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + src
