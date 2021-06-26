@@ -32,13 +32,8 @@ if __name__ == '__main__':
     hadoop_conf.set("fs.s3a.access.key", app_secret["s3_conf"]["access_key"])
     hadoop_conf.set("fs.s3a.secret.key", app_secret["s3_conf"]["secret_access_key"])
 
-    print("******** Testing Data", ut.filter_out_argument_source_list())
     arg_filter = ut.filter_out_argument_source_list()
     src_list = app_conf["source_list"]
-
-    print("old_src_List Is :- ", src_list)
-    print("old_src_List Is arg_filter :- ", arg_filter)
-    print("old_src_List Is arg_filter length :- ", len(arg_filter))
 
     if len(arg_filter) != 0:
         src_list = arg_filter
@@ -46,8 +41,6 @@ if __name__ == '__main__':
         print("else statement print........")
 
     print("src_List Is :- ", src_list)
-    print("src_List Is arg_filter :- ", arg_filter)
-    print("src_List Is arg_filter length :- ", len(arg_filter))
 
     for src in src_list:
 
