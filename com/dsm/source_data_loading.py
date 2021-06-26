@@ -3,8 +3,6 @@ from pyspark.sql.functions import *
 import yaml
 import utils.utilities as ut
 import os.path
-import sys as system
-import boto3
 
 if __name__ == '__main__':
 
