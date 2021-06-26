@@ -102,8 +102,8 @@ if __name__ == '__main__':
             cust_aadr = spark \
                 .read \
                 .format("com.mongodb.spark.sql.DefaultSource") \
-                .option("database", app_conf["mongodb_config"]["database"]) \
-                .option("collection", app_conf["mongodb_config"]["collection"]) \
+                .option("database", src_conf["mongodb_config"]["database"]) \
+                .option("collection", src_conf["mongodb_config"]["collection"]) \
                 .load()
             cust_aadr = cust_aadr.withColumn("ins_dt", current_date())
             cust_aadr.show()
