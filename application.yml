@@ -24,8 +24,8 @@ CP:
 
 ADDR:
   mongodb_config:
-    database: school
-    collection: students
+    database: cust
+    collection: address
 
 s3_conf:
     s3_bucket: storage-bucket-test123
