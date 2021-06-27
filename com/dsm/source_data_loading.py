@@ -99,22 +99,22 @@ if __name__ == '__main__':
         elif src == "ADDR":
             # MARK: MongoDB
             print("\nRead loyalty data from MongoDB and write it ot S3 bucket")
-            cust_aadr = spark\
+            cust_addr = spark\
                 .read \
                 .format("com.mongodb.spark.sql.DefaultSource") \
                 .option("database", src_conf["mongodb_config"]["database"]) \
                 .option("collection", src_conf["mongodb_config"]["collection"]) \
                 .load()
-            cust_addr = cust_aadr\
+            cust_addr = cust_addr\
                 .select(col("consumer_id"),
                         col("mobile-no").alias("mobile"),
                         col("address.street").alias("address"),
                         col("address.city").alias("city"),
                         col("address.state").alias("state")
                         )
-            cust_aadr = cust_aadr.withColumn("ins_dt", current_date())
-            cust_aadr.show()
-            ut.write_to_s3(cust_aadr, output_path)
+            cust_addr = cust_addr.withColumn("ins_dt", current_date())
+            cust_addr.show()
+            ut.write_to_s3(cust_addr, output_path)
 
         else:
             print("******* Please enter any one of the following: \nSB\nOL\nCP\nADDR\n\n******* For Multiple enter comma separated e.g: SB,DL \n\n Default execution:- SB ")
